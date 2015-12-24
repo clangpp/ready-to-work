@@ -135,20 +135,20 @@ call ConfigLineNumber()
 " Settings for go language.
 " Borrowed from xinghe@ 2015-03-05.
 
-function! FormatGoImports()
+function! FormatGoWithImports()
   let cursor_position = getpos('.')
-  silent exe '%!' . g:gofmt_command . ' 2>/tmp/go.$USER.err'
+  silent execute '%!' . g:gofmt_command . ' 2>/tmp/go.$USER.err'
   if v:shell_error
     undo
   endif
   call setpos('.', cursor_position)
-  silent exe "!sed --in-place -n 's/<standard input>/%/p' /tmp/go.$USER.err"
+  silent execute "!sed --in-place -n 's/<standard input>/%/p' /tmp/go.$USER.err"
 
   let w = winnr()  " Remember window number.
-  cf /tmp/go.$USER.err  " Pick up any errors from this file.
+  cfile /tmp/go.$USER.err  " Pick up any errors from this file.
   cwindow 3  " Open a 3-line window for errors, or close it if none.
   " Switch back to the original window.
-  exe w . 'wincmd w'
+  execute w . 'wincmd w'
   redraw!
   echo 'Formatted'
 endfunction
@@ -164,7 +164,7 @@ function! ConfigGolang()
 
   set rtp+=$GOROOT/misc/vim
   let g:gofmt_command = 'goimports'
-  autocmd BufWritePre *.go :silent call FormatGoImports()
+  autocmd BufWritePre *.go :silent call FormatGoWithImports()
 endfunction
 call ConfigGolang()
 
