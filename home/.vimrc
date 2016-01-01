@@ -169,6 +169,12 @@ endfunction
 call ConfigGolang()
 
 
+" Show differences with style
+" NOTE: Analog to Vim's diff mode, you can also use |]c| and |[c| for jumping
+" between hunks.
+VAMActivate github:mhinz/vim-signify
+
+
 function! ConfigPersonal()
   " VAMActivate github:tpope/vim-sensible
 
@@ -181,6 +187,7 @@ function! ConfigPersonal()
   set equalalways  " Makes split windows equal height and width
   set splitbelow
   set splitright
+  set expandtab
 endfunction
 call ConfigPersonal()
 
