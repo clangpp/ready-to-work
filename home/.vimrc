@@ -191,6 +191,9 @@ function! ConfigPersonal()
 endfunction
 call ConfigPersonal()
 
+" <C-p> to trigger markdown preview.
+VAMActivate github:JamshedVesuna/vim-markdown-preview
+
 
 " NOTE: Keep this at end of file.
 filetype plugin indent on  " Used-by: google.vim.
